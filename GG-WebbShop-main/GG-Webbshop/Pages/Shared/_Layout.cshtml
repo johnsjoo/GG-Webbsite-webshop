@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - GG_Webbshop</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+        <script src="~/js/site.js"></script>
+        <link rel="stylesheet" href="~/css/AdminStyling.css">
+    </head>
+    <body>
+        <header>
+            <!-- Navigation -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+                <div class="container">
+                    <a class="navbar-brand" href="/">Grevens Garderob</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item dropdown">
+                                <div class="btn-group bg-dark">
+
+                                    <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white bi bi-list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Kategorier</button>
+
+                                    <div class="dropdown-menu dropdown-menu-right bg-dark">
+                                        <button class="dropdown-item text-white bg-dark" id="AllProducts" value="" onclick="CatUrl();">Alla Produkter</button>
+                                        <button class="dropdown-item text-white bg-dark" id="Sweaters" value="Sweaters" onclick="CatUrl1();" type="button">Tröjor</button>
+                                        <button class="dropdown-item text-white bg-dark" id="Accessories" value="Accessories" onclick="CatUrl2();" type="button">Accessoarer</button>
+                                        <button class="dropdown-item text-white bg-dark" id="Blazers" value="Blazers" onclick="CatUrl3();" type="button">Blazers</button>
+                                        <button class="dropdown-item text-white bg-dark" id="Pants" value="Pants" onclick="CatUrl4();" type="button">Byxor</button>
+                                        <button class="dropdown-item text-white bg-dark" id="Shirts" value="Shirts" onclick="CatUrl5();" type="button">Skjortor</button>
+                                        <button class="dropdown-item text-white bg-dark" id="T-shirts" value="T-shirts" onclick="CatUrl6();" type="button">T-shirts</button>
+                                        <button class="dropdown-item text-white bg-dark" id="Diverse" value="Diverse" onclick="CatUrl7();" type="button">Övrigt</button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div>
+                            <div class="form-inline my-2 my-lg-0" style="padding-right : 10px">
+                                <button id="reaButton" type="button" class="btn btn-secondary bg-danger text-white" onclick="reaUrl();">Rea</button>
+                            </div>
+                        </div>
+                        <div class="align-content-center">
+                            <div class="form-inline my-2 my-lg-0">
+                                <input class="form-control mr-sm-2" id="searchInput" type="text" placeholder="Sök" aria-label="Search" autocomplete="off">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn" onclick="setUrl();">Sök</button>
+                            </div>
+                        </div>
+                        @if (ToolBox.ActiveRole != "root")
+                        {
+                            <a href="/CartView" class="nav-link" id="shopping-cart"><i class="bi bi-minecart"></i> Varukorg</a>
+                        }
+                            @using GG_Webbshop.Pages
+
+                            @{bool returnTokenValue = TokenChecker.UserStatus;}
+
+                            @if (returnTokenValue == false)
+                            {
+                                <div class="btn-group bg-dark">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white bi bi-list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Menyval
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right bg-dark">
+                                        <a href="/LogInView" class="nav-link" id="logg-in-icon"><i class="bi bi-door-open"></i> Logga in</a>
+                                        <a href="/RegisterPage" class="nav-link" id="Register-icon"><i class="bi bi-person-plus"></i> Registrera dig</a>
+                                        <a href="/AboutUsPage" class="nav-link" id="Register-icon"><i class="bi bi-info-circle"></i> Om oss</a>
+                                        <a href="/ExposedApiView" class="nav-link" id="Register-icon"><i class="bi bi-code-square"></i> För utvecklare</a>
+                                    </div>
+                                </div>
+                            }
+                            @if (returnTokenValue == true)
+                            {
+                                @if (ToolBox.ActiveRole == "root")
+                                {
+                                    <div class="btn-group bg-dark">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Välkommen @TokenChecker.UserName
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right bg-dark">
+                                            <a href="/Admin" class="nav-link" id="Register-icon" type="button"><i class="bi bi-person"></i> Admin</a>
+                                            <a href="/AdminOrderView" class="nav-link" id="Register-icon" type="button"><i class="bi bi-calendar2-check"></i> Granska Ordrar</a>
+                                            <a href="/LogOut" class="nav-link" id="Register-icon" type="button"><i class="bi bi-door-open"></i> Logga ut</a>
+                                            <a href="/AboutUsPage" class="nav-link" id="Register-icon"><i class="bi bi-info-circle"></i> Om oss</a>
+
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="btn-group bg-dark">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle bg-dark text-white" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Välkommen @TokenChecker.UserName
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-right bg-dark">
+                                            <a href="/UserPage" class="nav-link" id="Register-icon" type="button"><i class="bi bi-person"></i> Mina Sidor</a>
+                                            <a href="/LogOut" class="nav-link" id="Register-icon" type="button"><i class="bi bi-door-open"></i> Logga ut</a>
+                                            <a href="/AboutUsPage" class="nav-link" id="Register-icon"><i class="bi bi-info-circle"></i> Om oss</a>
+                                        </div>
+                                    </div>
+
+                                }
+
+                            }
+
+
+                        </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <partial name="_CookieConsentPartial" />
+            <main role="main" class="pb-3">
+
+                @RenderBody()
+            </main>
+        </div>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; Grevens Garderob 2021</p>
+            </div>
+            <!-- /.container -->
+        </footer>
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+        @RenderSection("Scripts", required: false)
+    </body>
+</html>

@@ -1,0 +1,63 @@
+﻿@page
+@model GG_Webbshop.Pages.ProductViewModel
+@{
+}
+
+@if (Model.Message2 != null)
+{
+    bool returnTokenValue = TokenChecker.UserStatus;
+
+    <h2>@Model.Message2</h2>
+    <a class="btn btn-dark" id="darkBtn" href="#" onclick="history.go(-1)">Tillbaka</a>
+    if (returnTokenValue == false)
+    {
+        <a class="btn btn-primary" href="/LoginView">Logga in</a>
+        <a class="btn btn-success" href="/RegisterPage">Registrera ett konto</a>
+    }
+
+
+}
+else
+{
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-9">
+
+                <div class="card mt-4">
+                    <img class="card-img-top img-fluid" src="~/img/@Model.Product.Image" alt="En fet tröja">
+                    <div class="card-body">
+                        <h3 class="card-title">@Model.Product.Name</h3>
+
+                        @if (Model.Product.Discount != default)
+                        {
+                            <h4><strike>@Model.Product.Price :-</strike></h4><h4 class="text-danger"> Rea @Math.Round((Model.Product.Price - (Model.Product.Price * (Model.Product.Discount / 100)))) :- </h4>
+                        }
+                        else
+                        {
+                            <h4>@Model.Product.Price :-</h4>
+                        }
+                        <p class="card-text">@Model.Product.Description</p>
+
+                        <b>I lager: @Model.Product.Stock</b>
+                        @if (ToolBox.ActiveRole != "root")
+                        {
+                            <form method="post">
+                                 <button type="submit" class="btn btn-dark">Lägg i kundvagnen</button>
+                             </form>
+                        }
+                        
+                    </div>
+                </div>
+
+                <div class="card card-outline-secondary my-4">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+}

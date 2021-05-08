@@ -1,0 +1,103 @@
+﻿@page
+@model GG_Webbshop.Pages.Admin.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Skapa produkt</h1>
+
+<h4>Produkt</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label>Produktens namn</label>
+                <input asp-for="Product.Name" class="form-control" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Pris</label>
+                <input asp-for="Product.Price" class="form-control" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Utvald (syns bland utvalda produkter på hemsidan)</label>
+                <select asp-for="highlightedValue" class="form-control" id="exampleFormControlSelect1">
+                    <option>Nej</option>
+                    <option>Ja</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Vikt i gram</label>
+                <input asp-for="Product.Weight" class="form-control" />
+                <span asp-validation-for="Product.Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Beskrivning</label>
+                <input asp-for="Product.Description" class="form-control" />
+                <span asp-validation-for="Product.Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Kategori</label>
+                <select asp-for="Product.Category" class="form-control" id="exampleFormControlSelect1">
+                    <option>Sweaters</option>
+                    <option>Accessories</option>
+                    <option>Blazers</option>
+                    <option>Pants</option>
+                    <option>Shirts</option>
+                    <option>T-shirts</option>
+                    <option>Diverse</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Skapad</label>
+                <input asp-for="Product.CreateDate" class="form-control" />
+                <span asp-validation-for="Product.CreateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Lagersaldo</label>
+                <input asp-for="Product.Stock" class="form-control" />
+                <span asp-validation-for="Product.Stock" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Storlek</label>
+                <select asp-for="Product.Size" class="form-control" id="exampleFormControlSelect1">
+                    <option>XS</option>
+                    <option>S</option>
+                    <option>M</option>
+                    <option>L</option>
+                    <option>XL</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Märke</label>
+                <input asp-for="Product.Brand" class="form-control" />
+                <span asp-validation-for="Product.Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group ">
+                <label>Välj bild</label>
+                <input asp-for="UploadFile" class="form-control border-0 bg-light" type="file" />
+                <span asp-validation-for="UploadFile" class="text-danger"></span>
+                @if (@Model.Message != null)
+                {
+                    <p class="text-danger">@Model.Message</p>
+                }
+            </div>
+            <div class="form-group">
+                <input style="width : 200px" type="submit" value="Skapa" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-success" asp-page="Index">Tillbaka till startsidan för administratörer</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,104 @@
+﻿@page
+@model GG_Webbshop.Pages.Admin.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Ändra</h1>
+
+<h4>Produkt</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Product.Id" />
+            <div class="form-group">
+                <label asp-for="Product.Name" class="control-label"></label>
+                <input asp-for="Product.Name" class="form-control" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Price" class="control-label"></label>
+                <input asp-for="Product.Price" class="form-control" />
+                <span asp-validation-for="Product.Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label> Rabatt i procent </label>
+                <input asp-for="Product.Discount" class="form-control" />
+                <span asp-validation-for="Product.Discount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Utvald (syns bland utvalda produkter på hemsidan)</label>
+                <select asp-for="highlightedValue" class="form-control" id="exampleFormControlSelect1">
+                    <option>Nej</option>
+                    <option>Ja</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Weight" class="control-label"></label>
+                <input asp-for="Product.Weight" class="form-control" />
+                <span asp-validation-for="Product.Weight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Description" class="control-label"></label>
+                <input asp-for="Product.Description" class="form-control" />
+                <span asp-validation-for="Product.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Image" class="control-label"></label>
+                <input asp-for="Product.Image" class="form-control" />
+                <span asp-validation-for="Product.Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Category</label>
+                <select asp-for="Product.Category" class="form-control" id="exampleFormControlSelect1">
+                    <option>Sweaters</option>
+                    <option>Accessories</option>
+                    <option>Blazers</option>
+                    <option>Pants</option>
+                    <option>Shirts</option>
+                    <option>T-shirts</option>
+                    <option>Diverse</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.CreateDate" class="control-label"></label>
+                <input asp-for="Product.CreateDate" class="form-control" />
+                <span asp-validation-for="Product.CreateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Stock" class="control-label"></label>
+                <input asp-for="Product.Stock" class="form-control" />
+                <span asp-validation-for="Product.Stock" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Size</label>
+                <select asp-for="Product.Size" class="form-control" id="exampleFormControlSelect1">
+                    <option>XS</option>
+                    <option>S</option>
+                    <option>M</option>
+                    <option>L</option>
+                    <option>XL</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Product.Brand" class="control-label"></label>
+                <input asp-for="Product.Brand" class="form-control" />
+                <span asp-validation-for="Product.Brand" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input style="width : 200px" type="submit" value="Spara" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class ="btn btn-success" asp-page="./Index">Tillbaka till startsidan för administratörer</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
